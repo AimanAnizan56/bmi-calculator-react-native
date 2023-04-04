@@ -1,20 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, NativeModules, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import Navbar from './components/Navbar';
+
+const { StatusBarManager } = NativeModules;
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.status_bar}>
       <StatusBar style="auto" />
-    </View>
+      <Navbar />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  status_bar: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
   },
 });
