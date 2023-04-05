@@ -13,6 +13,7 @@ export default function App() {
   const [weight, setWeight] = useState();
   const [age, setAge] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [BMI, setBMI] = useState();
 
   useEffect(() => {
     if (height != undefined && weight != undefined && age != undefined) {
@@ -21,6 +22,23 @@ export default function App() {
     }
     setButtonDisabled(true);
   }, [height, weight, age]);
+
+  const calculateBMI = () => {
+    // Convert height to meters
+    metre = height / 100;
+
+    // Calculate BMI
+    let _bmi = weight / (metre * metre);
+
+    // Adjust BMI based on gender and age
+    if (gender === 'male') {
+      _bmi += 0.5 * age - 5.4;
+    } else {
+      _bmi += 0.1 * age + 8.4;
+    }
+
+    setBMI(_bmi.toFixed(2));
+  };
 
   return (
     <SafeAreaView style={styles.status_bar}>
@@ -31,7 +49,7 @@ export default function App() {
       <Details textHeader="Weight (in kg)" placeholder="0kg" currentState={weight} setCurrentState={setWeight} />
       <Details textHeader="Age" placeholder="0yr" currentState={age} setCurrentState={setAge} />
 
-      <Pressable style={[styles.button_calculate, buttonDisabled && styles.button_calculate__disabled]} disabled={buttonDisabled}>
+      <Pressable style={[styles.button_calculate, buttonDisabled && styles.button_calculate__disabled]} disabled={buttonDisabled} onPress={calculateBMI}>
         <Text style={[styles.button_calculate__text, buttonDisabled && styles.button_calculate__text_disabled]}>Calculate</Text>
       </Pressable>
     </SafeAreaView>
