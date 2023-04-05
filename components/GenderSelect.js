@@ -34,7 +34,6 @@ function Button({ currentGender, gender, setGender }) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 30,
