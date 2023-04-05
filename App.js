@@ -14,14 +14,16 @@ export default function App() {
   const [age, setAge] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [BMI, setBMI] = useState();
+  const [conclusion, setConclusion] = useState();
 
   useEffect(() => {
+    setBMI();
     if (height != undefined && weight != undefined && age != undefined) {
       setButtonDisabled(false);
       return;
     }
     setButtonDisabled(true);
-  }, [height, weight, age]);
+  }, [height, weight, age, gender]);
 
   const calculateBMI = () => {
     // Convert height to meters
@@ -37,7 +39,18 @@ export default function App() {
       _bmi += 0.1 * age + 8.4;
     }
 
-    setBMI(_bmi.toFixed(2));
+    _bmi = _bmi.toFixed(2);
+    setBMI(_bmi);
+
+    if (_bmi < 18.5) {
+      setConclusion('Underweight');
+    } else if (_bmi >= 18.5 && _bmi <= 24.9) {
+      setConclusion('Healthy Weight.');
+    } else if (_bmi >= 25 && _bmi <= 29.9) {
+      setConclusion('Overweight.');
+    } else {
+      setConclusion('Obese.');
+    }
   };
 
   return (
@@ -52,6 +65,18 @@ export default function App() {
       <Pressable style={[styles.button_calculate, buttonDisabled && styles.button_calculate__disabled]} disabled={buttonDisabled} onPress={calculateBMI}>
         <Text style={[styles.button_calculate__text, buttonDisabled && styles.button_calculate__text_disabled]}>Calculate</Text>
       </Pressable>
+
+      {BMI && (
+        <>
+          <View style={styles.BMI_view}>
+            <Text style={styles.BMI_view__text}>{BMI}kg/m</Text>
+            <Text style={styles.BMI_view__superscript}>2</Text>
+          </View>
+          <View style={{ ...styles.BMI_view, marginTop: 0 }}>
+            <Text style={styles.BMI_view__con}>{conclusion}</Text>
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 }
@@ -79,5 +104,19 @@ const styles = StyleSheet.create({
   },
   button_calculate__text_disabled: {
     color: COLOR_WHITE__DISABLED,
+  },
+  BMI_view: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  BMI_view__text: {
+    fontSize: 16,
+  },
+  BMI_view__superscript: { fontSize: 12, lineHeight: 15 },
+  BMI_view__con: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
