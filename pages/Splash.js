@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSpinner as faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { COLOR_GRAY } from '../color';
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Homepage');
+    }, 2000);
+  }, []);
+
   return (
     <>
       <View style={container}>
