@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMars as faMars, faVenus as faVenus } from '@fortawesome/free-solid-svg-icons';
+import { COLOR_BLACK, COLOR_GRAY, COLOR_ORANGE, COLOR_PINK } from '../color';
 
 export default function GenderSelect({ gender, setGender }) {
   return (
@@ -48,12 +49,12 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: '100%',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 15,
-    borderColor: '#aeaeae',
+    borderColor: COLOR_GRAY,
   },
   button__selected: {
-    borderColor: '#484848',
+    borderColor: COLOR_BLACK,
   },
   button__content: {
     flex: 1,
@@ -63,9 +64,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   icon__male: {
-    color: 'orange',
+    color: COLOR_ORANGE,
   },
   icon__female: {
-    color: 'pink',
+    color: COLOR_PINK,
   },
 });
