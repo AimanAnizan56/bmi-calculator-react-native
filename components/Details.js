@@ -7,7 +7,7 @@ export default function Details({ textHeader, placeholder, currentState, setCurr
       <View style={styles.box}>
         <Text style={styles.text}>{textHeader}</Text>
         <View style={styles.center}>
-          <TextInput style={styles.text__input} keyboardType="numeric" placeholder={placeholder} value={currentState} onChange={(e) => setCurrentState(e.target.value)} />
+          <TextInput style={styles.text__input} keyboardType="numeric" placeholder={placeholder} value={currentState} onChangeText={setCurrentState} />
         </View>
       </View>
     </View>
