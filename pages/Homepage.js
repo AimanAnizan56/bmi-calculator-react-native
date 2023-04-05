@@ -16,7 +16,7 @@ export default function Homepage() {
 
   useEffect(() => {
     setBMI();
-    if (height != undefined && weight != undefined && age != undefined) {
+    if (height != undefined && weight != undefined && age != undefined && height != '' && weight != '' && age != '') {
       setButtonDisabled(false);
       return;
     }
