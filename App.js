@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { NativeModules, SafeAreaView } from 'react-native';
 import Homepage from './pages/Homepage';
+import SplashScreen from './pages/Splash';
 
 const { StatusBarManager } = NativeModules;
 const Stack = createNativeStackNavigator();
@@ -17,7 +18,8 @@ function App() {
     >
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SplashScreen">
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="Homepage" component={Homepage} />
         </Stack.Navigator>
       </NavigationContainer>
